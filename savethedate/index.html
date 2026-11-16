@@ -6,6 +6,10 @@
 <script src="./support.js"></script>
 </head>
 <body>
+<style>@keyframes __pspin{to{transform:rotate(360deg)}}</style>
+<div id="__preload" style="position:fixed;inset:0;z-index:999999;background:#F8F3EC;display:flex;align-items:center;justify-content:center;transition:opacity .55s ease;">
+  <div style="width:36px;height:36px;border:3px solid rgba(27,71,164,.16);border-top-color:#1B47A4;border-radius:50%;animation:__pspin .8s linear infinite;"></div>
+</div>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -154,6 +158,35 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+/* Preloader: só revela a página quando TODAS as imagens e fontes estiverem
+   prontas — assim tudo aparece de uma vez, sem carregar em partes. */
+(function(){
+  var ov = document.getElementById('__preload');
+  if(!ov) return;
+  var done = false;
+  var fontsReady = !(document.fonts && document.fonts.ready);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ fontsReady = true; }); }
+  function imagesReady(){
+    var imgs = document.images;
+    if(imgs.length === 0) return false; // ainda não renderizou
+    for(var i=0;i<imgs.length;i++){ if(!imgs[i].complete || imgs[i].naturalWidth === 0) return false; }
+    return true;
+  }
+  function reveal(){
+    if(done) return; done = true;
+    ov.style.opacity = '0';
+    setTimeout(function(){ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 600);
+  }
+  var t0 = Date.now();
+  (function check(){
+    if(done) return;
+    if(imagesReady() && fontsReady && document.readyState === 'complete'){ reveal(); return; }
+    if(Date.now() - t0 > 12000){ reveal(); return; } // rede de segurança
+    setTimeout(check, 120);
+  })();
+})();
 </script>
 </body>
 </html>
