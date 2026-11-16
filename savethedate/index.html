@@ -16,6 +16,13 @@ html,body{margin:0;background:#F8F3EC;}
 *{box-sizing:border-box;}
 a{color:#1B47A4;}
 a:hover{color:#D1287D;}
+/* contagem regressiva */
+.cd-box{display:flex;flex-direction:column;align-items:center;min-width:62px;background:#FFFFFF;border:1.5px solid #E7A9C6;border-radius:14px;padding:12px 6px;box-shadow:0 8px 20px rgba(20,40,90,.07);}
+.cd-num{font-family:'Gloock',serif;font-size:27px;line-height:1;color:#1B47A4;font-variant-numeric:tabular-nums;}
+.cd-lbl{margin-top:7px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6F7FA8;}
+/* no celular reduz a base em da composição para a foto não cortar */
+@media (max-width:600px){ [data-screen-label="Envelope"]{ font-size:min(8.6px,0.78vw,0.62svh)!important; } }
+@media (max-width:360px){ .cd-box{min-width:56px;} .cd-num{font-size:24px;} }
 </style>
 </helmet>
 <div style="min-height:100svh;background:#F8F3EC;display:flex;flex-direction:column;align-items:center;justify-content:{{ rootJustify }};padding:{{ rootPad }};overflow-x:hidden;font-family:Montserrat, sans-serif;color:#1B47A4;">
@@ -46,9 +53,8 @@ a:hover{color:#D1287D;}
             <div style="position:absolute;inset:1.5em;clip-path:{{ wavy }};background:linear-gradient(rgba(251,248,243,.65),rgba(251,248,243,.65)), url('assets/paper.png') 0 0 / 62em auto, #FBF8F3;background-blend-mode:normal, multiply;"></div>
             <div style="position:absolute;inset:3.1em;clip-path:{{ wavy }};background:#D1287D;"></div>
             <div style="position:absolute;inset:3.75em;clip-path:{{ wavy }};background:linear-gradient(rgba(251,248,243,.65),rgba(251,248,243,.65)), url('assets/paper.png') 0 0 / 62em auto, #FBF8F3;background-blend-mode:normal, multiply;"></div>
-            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 6.5em; text-align: center; top: 14px">
-              
-              <img src="assets/sp-heart-pink.png" alt="" style="width: 65px; display: block; height: 42px"><img src="assets/wordmark.png" alt="Luana &amp; Paulo" style="width:29em;margin-top:1.2em;display:block;">
+            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 7em; text-align: center;">
+              <img src="assets/sp-heart-pink.png" alt="" style="width:7.6em;height:auto;display:block;"><img src="assets/wordmark.png" alt="Luana &amp; Paulo" style="width:29em;margin-top:1.2em;display:block;">
               <div style="margin-top:1.2em;font-family:Gloock, serif;font-size:4.2em;line-height:1;color:#1B47A4;">10.10.27</div>
               <div style="margin-top:.7em;font-size:1.9em;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#1B47A4;">Ubatuba – SP</div>
             </div>
@@ -68,6 +74,17 @@ a:hover{color:#D1287D;}
     <div style="margin-top:5em;height:0;overflow:visible;display:flex;justify-content:center;opacity:{{ hintO }};transition:opacity .4s ease;">
       <div style="font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#1B47A4;white-space:nowrap;">Toque para abrir</div>
     </div>
+
+    <div style="max-height:{{ cdMax }};overflow:hidden;opacity:{{ hintO }};transition:max-height .9s cubic-bezier(.2,.8,.2,1), opacity .4s ease;display:flex;flex-direction:column;align-items:center;width:100%;padding:0 16px;">
+      <div style="margin-top:48px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#D1287D;">Contagem regressiva</div>
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <div class="cd-box"><span class="cd-num">{{ cdD }}</span><span class="cd-lbl">dias</span></div>
+        <div class="cd-box"><span class="cd-num">{{ cdH }}</span><span class="cd-lbl">horas</span></div>
+        <div class="cd-box"><span class="cd-num">{{ cdM }}</span><span class="cd-lbl">min</span></div>
+        <div class="cd-box"><span class="cd-num">{{ cdS }}</span><span class="cd-lbl">seg</span></div>
+      </div>
+      <div style="margin-top:16px;font-size:11px;font-weight:500;letter-spacing:.06em;color:#6F7FA8;">10 de outubro de 2027 · Ubatuba – SP</div>
+    </div>
   </div>
 
   <div data-screen-label="Mensagem" style="margin-top:{{ belowMT }};max-height:{{ belowMax }};overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:0 24px;opacity:{{ belowO }};transform:{{ belowT }};transition:opacity .9s ease, transform .9s ease, max-height 1.1s cubic-bezier(.2,.8,.2,1), margin-top 1.1s cubic-bezier(.2,.8,.2,1);pointer-events:{{ belowPE }};">
@@ -80,7 +97,7 @@ a:hover{color:#D1287D;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;addressUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;skipIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Animação&quot;}}">
 class Component extends DCLogic {
-  state = { p: 0 };
+  state = { p: 0, now: Date.now() };
   timers = [];
   constructor(props) {
     super(props);
@@ -93,8 +110,8 @@ class Component extends DCLogic {
     }
     this.wavy = `polygon(${pts.join(',')})`;
   }
-  componentDidMount() { if (this.props.skipIntro) this.setState({ p: 4 }); }
-  componentWillUnmount() { this.timers.forEach(clearTimeout); }
+  componentDidMount() { if (this.props.skipIntro) this.setState({ p: 4 }); this.cdTimer = setInterval(() => this.setState({ now: Date.now() }), 1000); }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); clearInterval(this.cdTimer); }
   open = () => {
     if (this.state.p !== 0) return;
     const at = (ms, p) => this.timers.push(setTimeout(() => this.setState({ p }), ms));
@@ -105,6 +122,9 @@ class Component extends DCLogic {
   renderVals() {
     const { p } = this.state;
     const up = p >= 3;
+    const alvo = new Date('2027-10-10T16:00:00').getTime();
+    const dif = Math.max(0, alvo - (this.state.now || Date.now()));
+    const pad2 = (n) => (n < 10 ? '0' : '') + n;
     return {
       onOpen: this.open, replay: this.replay,
       cursor: p === 0 ? 'pointer' : 'default',
@@ -130,6 +150,11 @@ class Component extends DCLogic {
       belowPE: p >= 4 ? 'auto' : 'none',
       belowMax: up ? '420px' : '0px', belowMT: up ? 'clamp(48px,8vh,88px)' : '0px',
       addressUrl: this.props.addressUrl || 'Endereco.dc.html',
+      cdD: String(Math.floor(dif / 86400000)),
+      cdH: pad2(Math.floor(dif / 3600000) % 24),
+      cdM: pad2(Math.floor(dif / 60000) % 60),
+      cdS: pad2(Math.floor(dif / 1000) % 60),
+      cdMax: p === 0 ? '360px' : '0px',
     };
   }
 }
