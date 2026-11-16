@@ -72,7 +72,7 @@ a:hover{color:#D1287D;}
       </div>
     </div>
     <div style="margin-top:5em;height:0;overflow:visible;display:flex;justify-content:center;opacity:{{ hintO }};transition:opacity .4s ease;">
-      <div style="font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#1B47A4;white-space:nowrap;">Toque para abrir</div>
+      <div onClick="{{ onOpen }}" style="font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#1B47A4;white-space:nowrap;cursor:{{ cursor }};">Toque para abrir</div>
     </div>
 
     <div style="max-height:{{ cdMax }};overflow:hidden;opacity:{{ hintO }};transition:max-height .9s cubic-bezier(.2,.8,.2,1), opacity .4s ease;display:flex;flex-direction:column;align-items:center;width:100%;padding:0 16px;">
