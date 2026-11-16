@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<!-- Firebase (salva os endereços dos convidados) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="./firebase-enderecos.js"></script>
 </head>
 <body>
 <x-dc>
@@ -119,7 +123,8 @@ input::placeholder{color:#9AA8C8;}
     return e; }
   onSubmit = async (ev) => { ev.preventDefault(); const { f } = this.state; const e=this.validate(f); if(Object.keys(e).length){ this.setState({ e }); return; }
     const url=this.props.submitUrl; this.setState({ sending:true, sendError:'' });
-    try { if(url) { const r=await fetch(url,{ method:'POST', headers:{ 'Content-Type':'application/json', Accept:'application/json' }, body: JSON.stringify(f) }); if(!r.ok) throw new Error(); }
+    try { if(window.saveEndereco) { await window.saveEndereco(f); }
+      else if(url) { const r=await fetch(url,{ method:'POST', headers:{ 'Content-Type':'application/json', Accept:'application/json' }, body: JSON.stringify(f) }); if(!r.ok) throw new Error(); }
       this.setState({ sent:true, sending:false }); window.scrollTo({ top:0, behavior:'smooth' });
     } catch(_) { this.setState({ sending:false, sendError:'Não foi possível enviar. Tente novamente.' }); } };
   renderVals(){ const s=this.state; return { f:s.f, e:s.e, sent:s.sent, notSent:!s.sent, sending:s.sending, cepMsg:s.cepMsg || '', sendError:s.sendError, submitLabel: s.sending?'Enviando…':'Enviar', firstName:(s.f.nome.trim().split(' ')[0]||''), onField:this.onField, onCep:this.onCep, onSubmit:this.onSubmit }; }
