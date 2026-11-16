@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Authentic Signature";src:url("assets/AuthenticSignature.otf") format("opentype");font-display:swap;}
+html,body{margin:0;background:#F8F3EC;}
+*{box-sizing:border-box;}
+a{color:#1B47A4;}
+a:hover{color:#D1287D;}
+</style>
+</helmet>
+<div style="min-height:100svh;background:#F8F3EC;display:flex;flex-direction:column;align-items:center;justify-content:{{ rootJustify }};padding:{{ rootPad }};overflow-x:hidden;font-family:Montserrat, sans-serif;color:#1B47A4;">
+
+<div data-screen-label="Envelope" style="font-size:min(8.6px, 0.86vw, 0.7svh);display:flex;flex-direction:column;align-items:center;">
+    <div data-screen-label="Título" style="position:relative;width:120em;max-width:100vw;height:{{ titleH }};transition:height 1.1s cubic-bezier(.2,.8,.2,1);">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4em;opacity:{{ saveO }};transform:{{ saveT }};transition:opacity .8s ease .15s, transform .8s ease .15s;">
+        <div style="font-family:'Authentic Signature', cursive;font-size:17em;line-height:1.15;color:#1B47A4;text-align:center;white-space:nowrap;font-weight:400;">Save the Date</div>
+        <div style="font-size:max(11px, 2.2em);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#D1287D;">Vamos nos casar!</div>
+      </div>
+    </div>
+    <div style="height:{{ titleGap }};transition:height 1.1s cubic-bezier(.2,.8,.2,1);"></div>
+    <div style="height:{{ spacerH }};transition:height 1.1s cubic-bezier(.2,.8,.2,1);"></div>
+    <div onClick="{{ onOpen }}" style="position:relative;width:100em;height:72.5em;cursor:{{ cursor }};perspective:1600px;">
+      <div style="position:absolute;left:0;top:-56.8em;width:100em;height:58em;z-index:1;transform-origin:50% 100%;transform:{{ flapT }};opacity:{{ flapO }};transition:transform .9s cubic-bezier(.3,.1,.2,1) .05s, opacity .2s linear .05s;">
+        <img src="assets/env-flap.png" alt="" style="width:100%;height:100%;display:block;">
+      </div>
+      <img src="assets/env-back.png" alt="" style="position:absolute;left:0;top:0;width:100em;height:72.5em;z-index:2;display:block;opacity:{{ openO }};transition:opacity .45s ease;filter:drop-shadow(0 1.4em 1.6em rgba(20,40,90,.2));">
+      <div style="position:absolute;left:-17em;right:-17em;top:-90em;bottom:2em;overflow:hidden;z-index:3;pointer-events:none;">
+          <div style="position:absolute;left:69.5em;top:43em;width:44em;height:70em;z-index:2;transform-origin:50% 100%;background:#FCFBF8;padding:4.5em 3.25em 0;box-shadow:0 .6em 1.8em rgba(20,40,90,.25);transform:{{ photoT }};transition:transform 1.15s cubic-bezier(.2,.8,.2,1) {{ photoDelay }};">
+            <div style="width:100%;height:50.5em;background:#d9d2c8;overflow:hidden;">
+              <img src="assets/casal4.png" alt="Luana e Paulo" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;">
+            </div>
+          </div>
+
+          <div style="position:absolute;left:29em;top:51em;width:54em;height:60em;z-index:1;transform-origin:50% 100%;transform:{{ cardT }};transition:transform 1.15s cubic-bezier(.2,.8,.2,1) {{ cardDelay }};filter:drop-shadow(0 .6em 1.2em rgba(20,40,90,.25));">
+            <div style="position:absolute;inset:0;clip-path:{{ wavy }};background:#D1287D;"></div>
+            <div style="position:absolute;inset:1.5em;clip-path:{{ wavy }};background:linear-gradient(rgba(251,248,243,.65),rgba(251,248,243,.65)), url('assets/paper.png') 0 0 / 62em auto, #FBF8F3;background-blend-mode:normal, multiply;"></div>
+            <div style="position:absolute;inset:3.1em;clip-path:{{ wavy }};background:#D1287D;"></div>
+            <div style="position:absolute;inset:3.75em;clip-path:{{ wavy }};background:linear-gradient(rgba(251,248,243,.65),rgba(251,248,243,.65)), url('assets/paper.png') 0 0 / 62em auto, #FBF8F3;background-blend-mode:normal, multiply;"></div>
+            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 6.5em; text-align: center; top: 14px">
+              
+              <img src="assets/sp-heart-pink.png" alt="" style="width: 65px; display: block; height: 42px"><img src="assets/wordmark.png" alt="Luana &amp; Paulo" style="width:29em;margin-top:1.2em;display:block;">
+              <div style="margin-top:1.2em;font-family:Gloock, serif;font-size:4.2em;line-height:1;color:#1B47A4;">10.10.27</div>
+              <div style="margin-top:.7em;font-size:1.9em;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#1B47A4;">Ubatuba – SP</div>
+            </div>
+          </div>
+        </div>
+      <img src="assets/env-pocket.png" alt="" style="position:absolute;left:0;top:0;width:100em;height:72.5em;z-index:4;display:block;opacity:{{ openO }};transition:opacity .45s ease;pointer-events:none;">
+      <div style="position:absolute;left:43em;top:47.8em;width:14em;height:13.8em;z-index:5;opacity:{{ openO }};transition:opacity .5s ease .3s;filter:drop-shadow(0 .5em .7em rgba(10,25,60,.38));pointer-events:none;">
+        <img src="assets/shell-seal.png" alt="" style="width:100%;height:100%;display:block;">
+      </div>
+      <div style="position:absolute;left:.8em;top:6em;width:98.4em;height:65.6em;z-index:6;opacity:{{ closedO }};transition:opacity .45s ease;filter:drop-shadow(0 1.4em 1.6em rgba(20,40,90,.22));pointer-events:none;">
+        <img src="assets/env-closed.png" alt="Envelope" style="width:100%;height:100%;display:block;">
+      </div>
+      <div style="position:absolute;left:42em;top:40.5em;width:16em;height:15.8em;z-index:7;opacity:{{ closedO }};transform:{{ sealT }};transition:transform .4s cubic-bezier(.3,1.6,.5,1), opacity .35s ease;filter:drop-shadow(0 .5em .7em rgba(10,25,60,.38));pointer-events:none;">
+        <img src="assets/shell-seal.png" alt="" style="width:100%;height:100%;display:block;">
+      </div>
+    </div>
+    <div style="margin-top:5em;height:0;overflow:visible;display:flex;justify-content:center;opacity:{{ hintO }};transition:opacity .4s ease;">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#1B47A4;white-space:nowrap;">Toque para abrir</div>
+    </div>
+  </div>
+
+  <div data-screen-label="Mensagem" style="margin-top:{{ belowMT }};max-height:{{ belowMax }};overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:0 24px;opacity:{{ belowO }};transform:{{ belowT }};transition:opacity .9s ease, transform .9s ease, max-height 1.1s cubic-bezier(.2,.8,.2,1), margin-top 1.1s cubic-bezier(.2,.8,.2,1);pointer-events:{{ belowPE }};">
+    <img src="assets/ill-stamp.png" alt="" style="width:110px;display:block;">
+    <div style="font-size:15px;font-weight:600;letter-spacing:.22em;line-height:1.7;text-transform:uppercase;color:#1B47A4;max-width:260px;">O convite será enviado em breve</div>
+    <a href="{{ addressUrl }}" style="margin-top:8px;display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 36px;border-radius:999px;background:#1B47A4;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:background .2s ease;" style-hover="background:#D1287D;color:#FFFFFF;">Envie seu endereço</a>
+    <button onClick="{{ replay }}" style="margin-top:6px;background:none;border:0;padding:12px;font-family:Montserrat, sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#6F7FA8;cursor:pointer;" style-hover="color:#D1287D;">Fechar envelope</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;addressUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;skipIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Animação&quot;}}">
+class Component extends DCLogic {
+  state = { p: 0 };
+  timers = [];
+  constructor(props) {
+    super(props);
+    const pts = [], N = 240;
+    for (let i = 0; i < N; i++) {
+      const t = (i / N) * Math.PI * 2;
+      const k = 1 - 0.042 * (1 - Math.cos(t * 12)) / 2;
+      const x = 50 + 50 * k * Math.sin(t), y = 50 - 50 * k * Math.cos(t);
+      pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+    }
+    this.wavy = `polygon(${pts.join(',')})`;
+  }
+  componentDidMount() { if (this.props.skipIntro) this.setState({ p: 4 }); }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); }
+  open = () => {
+    if (this.state.p !== 0) return;
+    const at = (ms, p) => this.timers.push(setTimeout(() => this.setState({ p }), ms));
+    this.setState({ p: 1 });
+    at(260, 2); at(1100, 3); at(2200, 4);
+  };
+  replay = () => { this.timers.forEach(clearTimeout); this.timers = []; this.setState({ p: 0 }); };
+  renderVals() {
+    const { p } = this.state;
+    const up = p >= 3;
+    return {
+      onOpen: this.open, replay: this.replay,
+      cursor: p === 0 ? 'pointer' : 'default',
+      hintO: p === 0 ? 1 : 0,
+      namesO: up ? 0 : 1, namesT: up ? 'translateY(-10px)' : 'translateY(0)',
+      saveO: up ? 1 : 0, saveT: up ? 'translateY(0)' : 'translateY(10px)',
+      sealT: p === 1 ? 'scale(.92)' : 'scale(1)',
+      flapT: p >= 2 ? 'rotateX(0deg)' : 'rotateX(88deg)',
+      flapO: p >= 2 ? 1 : 0,
+      closedO: p >= 2 ? 0 : 1,
+      openO: p >= 2 ? 1 : 0,
+      flapZ: up ? 2 : 6,
+      monoO: p >= 2 ? 0 : 1, monoDelay: p >= 2 ? '.3s' : '0s',
+      flapInnerO: p >= 2 ? 1 : 0, flapInnerDelay: p >= 2 ? '.4s' : '0s',
+      photoT: up ? 'translateY(0) rotate(6deg) scale(.84)' : 'translateY(160em) rotate(0deg)',
+      cardT: up ? 'translateY(0) rotate(-6deg) scale(1.31)' : 'translateY(160em) rotate(0deg)',
+      photoDelay: '0s', cardDelay: up ? '.22s' : '0s',
+      wavy: this.wavy,
+      spacerH: p >= 2 ? '57.5em' : '0em',
+      titleH: p >= 2 ? '24em' : '0em', titleGap: p >= 2 ? '12em' : '0em',
+      rootJustify: p >= 2 ? 'flex-start' : 'center', rootPad: p >= 2 ? '7vh 0 8vh' : '0 0 6vh',
+      belowO: p >= 4 ? 1 : 0, belowT: p >= 4 ? 'translateY(0)' : 'translateY(16px)',
+      belowPE: p >= 4 ? 'auto' : 'none',
+      belowMax: up ? '420px' : '0px', belowMT: up ? 'clamp(48px,8vh,88px)' : '0px',
+      addressUrl: this.props.addressUrl || 'Endereco.dc.html',
+    };
+  }
+}
+</script>
+</body>
+</html>
